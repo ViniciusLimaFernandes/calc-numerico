@@ -1,30 +1,44 @@
 import math
 
-def main():
-    a = 2
-    b = 3
+# a = float(input("Digite o valor de a: "))
+# b = float(input("Digite o valor de b: "))
+# e = float(input("Digite o valor da precisão(e): "))
+def f(x):
+    return (pow(x,2) - 5) #função trabalhada na sala
 
-    dicotomia(a,b,(a+b)/2)
 
-def dicotomia(a,b,xi):
-    x = (a+b)/2
-    err = (abs(b-a))/2
-    errRelat = abs((x-xi/max(1,abs(x))))
-
-    print("a=",a," b=",b," x=",x," err=", err," errRelat=",errRelat)
-    print(abs(x-xi), " < ",err*max(1,abs(x)))    
-
-    if(abs(x-xi)<err*max(1,abs(x))):
-        return
-
-    if(calcFunc(x)*calcFunc(a) < 0):
-        return dicotomia(a,x,x)
+def verifica_intervalo(a,b):
+    y = False
+    if f(a) * f(b) < 0:
+        y = True
+    return y
     
-    return dicotomia(x,b,x)
-    
-def calcFunc(x):
-    f = lambda n: (n**2)-5
+def calcula_raiz(a, b, e):
+    i_meio = 0
 
-    return f(x)
-
-main()
+    if (verifica_intervalo(a,b)) == True:
+        while (math.fabs(b-a)/2 >= e):
+            i_meio = (a+b)/2
+            if f(i_meio) == 0:
+                print("************************")
+                print("Valor da raiz: ", round(i_meio, 5))
+                print("************************")
+                break
+            elif f(a) * f(i_meio) < 0:
+                b = i_meio
+            else: 
+                a = i_meio
+        print("************************")
+        print("Valor da raiz: ", round(i_meio, 5))
+        print("************************")
+        
+    else:
+        print("************************")       
+        print("Intervalo não existe")
+        print("************************")
+        
+#valores
+calcula_raiz(1,6, 0.01)
+calcula_raiz(1,8, 0.01)
+calcula_raiz(2,3, 0.01)      
+calcula_raiz(4,6, 0.01) 
