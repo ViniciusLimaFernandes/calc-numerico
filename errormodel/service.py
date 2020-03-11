@@ -3,8 +3,8 @@ import math
 from calculus.methods import *
 
 def runApp(n):
-  n = rad(n)
   printEuler(n)
+  n = rad(n)
   printSen(n)
   printCos(n)
   return
@@ -12,7 +12,8 @@ def runApp(n):
 
 def printEuler(n):
   try:
-    print("e: ", math.exp(n), exp(n))
+    print(n)
+    print("e: lib=", math.exp(n), " func=", exp(n), " var=", (math.exp(n)-exp(n)*100)/math.exp(n), " %")
   except:
     logging.error("Euler error")
     
